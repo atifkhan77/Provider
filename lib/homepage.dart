@@ -13,7 +13,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final counter = Provider.of<Counter>(context);
-    final count = counter.count;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -29,9 +28,14 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: [
               const Padding(padding: EdgeInsets.only(top: 100)),
-              Text(
-                " you pressed button \n $count times",
-                style: const TextStyle(fontSize: 20, color: Colors.deepPurple),
+              Consumer<Counter>(
+                builder: (BuildContext context, value, child) {
+                  return Text(
+                    " you pressed button \n ${value.count} times",
+                    style:
+                        const TextStyle(fontSize: 20, color: Colors.deepPurple),
+                  );
+                },
               ),
               const SizedBox(
                 height: 20,
